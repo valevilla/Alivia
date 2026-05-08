@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#020617" />
+    <meta name="description" content="Alivia - Sistema de Sufragio Descentralizado con IA" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <title>Alivia | Sufragio Seguro</title>
+
+    <style>
+      /* Splash Screen Estilizado */
+      body { margin: 0; background-color: #020617; font-family: 'Inter', sans-serif; }
+      #loader-container {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+      }
+      .loader-logo {
+        width: 80px;
+        height: 80px;
+        background: #4f46e5;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 40px rgba(79, 70, 229, 0.3);
+        margin-bottom: 20px;
+        animation: pulse 2s infinite ease-in-out;
+      }
+      .loader-text {
+        color: #f8fafc;
+        font-weight: 900;
+        letter-spacing: -0.05em;
+        font-style: italic;
+        font-size: 1.5rem;
+      }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.1); opacity: 0.8; }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>Necesitas habilitar JavaScript para ejecutar esta app.</noscript>
+    
+    <div id="loader-container">
+      <div class="loader-logo">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="loader-text">ALIVIA</div>
+    </div>
+
+    <div id="root"></div>
+
+    <script>
+      // Remover loader cuando React esté listo
+      window.addEventListener('load', () => {
+        const loader = document.getElementById('loader-container');
+        setTimeout(() => {
+          loader.style.opacity = '0';
+          setTimeout(() => loader.remove(), 500);
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
