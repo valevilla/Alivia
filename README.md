@@ -26,3 +26,19 @@ Sigue estos pasos para ejecutar el proyecto localmente:
 1. **Clonar el repositorio:**
    ```bash
    git clone [https://github.com/tu-usuario/protexia.git](https://github.com/tu-usuario/protexia.git)
+   ```
+## 💻 Estructura del código
+```bash
+/alivia-voto-seguro
+├── /public
+├── /src
+│   ├── /components
+│   │   ├── QawiAssistant.jsx    # IA de acompañamiento y SOS
+│   │   ├── VotingMap.jsx       # Google Maps e itinerario seguro
+│   │   ├── DashboardRealTime.jsx # Panel de control de votación
+│   │   └── BlockchainReceipt.jsx # Hash e integridad
+│   ├── App.js                  # Lógica principal y rutas
+│   └── index.css               # Estilos Tailwind
+├── README.md
+├── LICENSE (BSD-3-Clause)
+└── package.json
