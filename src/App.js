@@ -1,61 +1,63 @@
 import React, { useState } from 'react';
+// Importación de componentes desde sus respectivas carpetas
 import QawiAssistant from './components/QawiAssistant';
 import VotingMap from './components/VotingMap';
 import DashboardRealTime from './components/DashboardRealTime';
 import BlockchainReceipt from './components/BlockchainReceipt';
-import { Lock, Fingerprint, LogOut, ShieldCheck } from 'lucide-react';
+import './index.css';
 
 function App() {
-  const [view, setView] = useState('auth');
-  const [dni, setDni] = useState('');
   const [isSosActive, setIsSosActive] = useState(false);
+  const [view, setView] = useState('main'); // Control de navegación interna
 
-  const stats = { votos: "15,402,192", participacion: "68.4%" };
-
-  const handleAuth = () => { if (dni.length === 8) setView('voto'); };
+  // Datos de ejemplo para las visualizaciones
+  const electionStats = { votos: "15,402,192", participacion: "68.4%" };
 
   return (
-    <div className={`min-h-screen transition-colors duration-700 ${isSosActive ? 'bg-red-950' : 'bg-[#020617]'} text-slate-100 p-4 pb-20`}>
-      <header className="flex justify-between items-center mb-8">
+    <div className={`min-h-screen transition-all duration-700 ${isSosActive ? 'bg-red-950' : 'bg-[#020617]'} text-white p-4 pb-24`}>
+      
+      {/* Header Fijo */}
+      <header className="max-w-md mx-auto py-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <ShieldCheck className="text-indigo-500" />
-          <h1 className="font-black text-xl italic">ALIVIA</h1>
+          <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+            <span className="font-black text-xs">A</span>
+          </div>
+          <h1 className="font-black italic tracking-tighter text-xl">ALIVIA</h1>
         </div>
-        {view !== 'auth' && <button onClick={() => setView('auth')} className="text-slate-500"><LogOut size={20}/></button>}
+        <div className="status-badge bg-emerald-500/10 text-emerald-500 border-emerald-500/20 px-3 py-1 rounded-full text-[10px] font-bold">
+          NODO ACTIVO
+        </div>
       </header>
 
       <main className="max-w-md mx-auto space-y-6">
+        
+        {/* Componente 1: IA Qawi (Carpeta /components) */}
         <QawiAssistant 
           isSosActive={isSosActive}
           onSos={() => setIsSosActive(!isSosActive)}
-          message={view === 'auth' ? "Hola Valeria, ingresa tu DNI para validar tu identidad en el nodo nacional." : "Recuerda que tu voto es secreto y está protegido por Blockchain."}
+          message={isSosActive ? "ALERTA SOS: Protocolo de seguridad activado. Grabando audio y enviando GPS." : "Bienvenida Valeria. Tu ruta al local de votación es segura hoy."}
         />
 
-        {view === 'auth' ? (
-          <div className="bg-slate-900 border border-slate-800 p-8 rounded-[3rem] space-y-6">
-            <Lock className="mx-auto text-indigo-500" size={48} />
-            <input 
-              type="text" maxLength={8} value={dni}
-              onChange={(e) => setDni(e.target.value.replace(/\D/g, ''))}
-              placeholder="DNI"
-              className="w-full bg-black border-2 border-slate-800 rounded-2xl py-5 text-center text-3xl font-mono focus:border-indigo-500 outline-none"
-            />
-            <button onClick={handleAuth} className="w-full bg-indigo-600 py-5 rounded-2xl font-black shadow-lg shadow-indigo-600/20">AUTENTICAR</button>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            <VotingMap destination="U. Nacional de Ingeniería - Mesa 042" />
-            <DashboardRealTime stats={stats} />
-            <BlockchainReceipt hash="0XF5B3921A772B5CC4E01B721A772B5CC4E01B" timestamp="08/05/2026 01:15 AM" />
-          </div>
-        )}
+        {/* Componente 2: Mapa y GPS (Carpeta /components) */}
+        <VotingMap destination="Centro de Votación UNI - Puerta 3" />
+
+        {/* Componente 3: Dashboard en tiempo real (Carpeta /components) */}
+        <DashboardRealTime stats={electionStats} />
+
+        {/* Componente 4: Blockchain (Carpeta /components) */}
+        <BlockchainReceipt 
+          hash="0x71C7656EC7AB88B098DEFB751B7401B5F6D8976F" 
+          timestamp="08 Mayo 2026 - 01:55 AM" 
+        />
+
       </main>
 
-      {isSosActive && (
-        <div className="fixed top-10 left-4 right-4 bg-red-600 p-4 rounded-2xl text-center animate-bounce z-50">
-          <p className="font-black text-white">🚨 ALERTA SOS: AUTORIDADES NOTIFICADAS</p>
-        </div>
-      )}
+      {/* Barra de navegación inferior tipo "Mobile App" */}
+      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-black/80 backdrop-blur-2xl border border-white/10 p-2 rounded-full flex justify-around shadow-2xl">
+        <button className="p-4 text-indigo-500"><span className="block w-2 h-2 bg-indigo-500 rounded-full mx-auto mb-1"></span></button>
+        <button className="p-4 text-slate-500 hover:text-white transition-colors">📊</button>
+        <button className="p-4 text-slate-500 hover:text-white transition-colors">👤</button>
+      </nav>
     </div>
   );
 }
