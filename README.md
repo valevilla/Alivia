@@ -4,7 +4,7 @@
 
 
 
-## 🌟 Características Destacadas
+## Características Destacadas
 
 - **Agente Autónomo Qawi:** Una interfaz asistida que utiliza lenguaje natural y guías visuales para ayudar a personas con dificultades técnicas o adultos mayores a completar su voto sin errores y transparente. La alarma SOS tiene integrada.
 - **Ruta Segura con Google Maps:** Integración de GPS que traza el camino más seguro hacia el local de votación, monitoreando incidentes o zonas de riesgo en tiempo real.
